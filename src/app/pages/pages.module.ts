@@ -12,6 +12,8 @@ import { IncrementadorComponent } from '../components/incrementador.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraficoDonaComponent } from '../grafico-dona/grafico-dona.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { ObservablesComponent } from './observables/observables.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     IncrementadorComponent,
     GraficoDonaComponent,
     AccountSettingsComponent,
+    PromesasComponent,
+    ObservablesComponent,
   ],
   exports: [
     CommonModule,
