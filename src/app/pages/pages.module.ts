@@ -14,6 +14,7 @@ import { GraficoDonaComponent } from '../grafico-dona/grafico-dona.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { ObservablesComponent } from './observables/observables.component';
+import { LoginGuard } from '../services/guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,9 @@ import { ObservablesComponent } from './observables/observables.component';
     PagesRoutingModule,
     FormsModule,
     ChartsModule
+  ],
+  providers: [
+    LoginGuard
   ]
 })
 export class PagesModule { }

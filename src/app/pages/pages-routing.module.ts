@@ -7,10 +7,11 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { ObservablesComponent } from './observables/observables.component';
+import { LoginGuard } from '../services/guards/login.guard';
 
 const ROUTES_PAGES: Routes = [  {
   path: '',
-  component: PagesComponent,
+  component: PagesComponent, canActivate: [LoginGuard],
   children: [
     { path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'} },
     { path: 'progress', component: ProgressComponent, data: {titulo: 'Progress'} },
