@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Usuario } from '../models/usuario.models';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICES } from './../config/config';
@@ -6,19 +6,25 @@ import { Observable } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import Swal from 'sweetalert2';
+import { SubirArchivoService } from './subir-archivo/subir-archivo.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UsuarioService  {
+
 
   usuario: Usuario;
   token: string;
 
-  get estaLogueado() {
-    return !!this.token;
+
+  constructor(private http: HttpClient, private subirArService: SubirArchivoService) {
+    this.token = localStorage.getItem('token');
+    this.usuario = JSON.parse( localStorage.getItem('usuario'));
   }
 
-  constructor(private http: HttpClient) {}
+  estaLogueado() {
+    return !!this.token;
+  }
 
   login(usuario: Usuario, recordar: boolean = false) {
 
@@ -71,7 +77,6 @@ export class UsuarioService {
       );
   }
 
-
   logout() {
     this.usuario = null;
     this.token = '';
@@ -81,4 +86,30 @@ export class UsuarioService {
 
     window.location.href = '#login';
   }
+
+  actualizarUsuario(usuarioActualizado: Usuario): Observable<any> {
+    const URL = `${URL_SERVICES}/usuario/${this.usuario._id}?token=${this.token}`;
+
+    return this.http.put(URL, usuarioActualizado)
+      .pipe(
+        map((res: any) => {
+          const userDB = res.usuario;
+          this.guardarStorage(userDB._id, userDB.token, userDB);
+          return res;
+        })
+      );
+  }
+
+  cambiarImagen(archivo: File, id: string) {
+      this.subirArService.subirArchivo(archivo, 'usuarios', id)
+        .then( (res: any) => {
+          this.usuario.img = res.usuario.img;
+          Swal.fire('Imagen actualizada', 'La imagen ha sido actualizada con exito', 'success');
+          this.guardarStorage(id, this.token, this.usuario);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  }
+
 }

@@ -16,7 +16,7 @@ import {HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     AppComponent,

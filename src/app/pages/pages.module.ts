@@ -15,6 +15,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { ObservablesComponent } from './observables/observables.component';
 import { LoginGuard } from '../services/guards/login.guard';
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { LoginGuard } from '../services/guards/login.guard';
     AccountSettingsComponent,
     PromesasComponent,
     ObservablesComponent,
+    ProfileComponent,
   ],
   exports: [
     CommonModule,
@@ -41,7 +44,9 @@ import { LoginGuard } from '../services/guards/login.guard';
     Sharedodule,
     PagesRoutingModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    PipesModule,
+    CommonModule
   ],
   providers: [
     LoginGuard

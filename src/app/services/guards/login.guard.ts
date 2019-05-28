@@ -8,13 +8,16 @@ import { UsuarioService } from '../usuario.service';
 export class LoginGuard implements CanActivate {
 
   constructor( private usuarioService: UsuarioService,
-          private route: Router) {}
+               private route: Router) {}
 
   canActivate( ): boolean {
-    if (!this.usuarioService.estaLogueado){
+    if (!this.usuarioService.estaLogueado()){
+      console.log('No estoy logueado');
+
       this.route.navigate(['/login']);
+    } else {
+      return this.usuarioService.estaLogueado();
     }
-    return this.usuarioService.estaLogueado;
   }
 
 }
