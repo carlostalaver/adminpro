@@ -3,7 +3,6 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Perfil del usuario</h4>
-        <h6 class="card-subtitle">Nombre usuario</h6>
         <form class="form p-t-20" #f="ngForm" (ngSubmit)="guardar(f)">
           <div class="form-group">
             <label for="exampleInputuname">Nombre de usuario</label>
@@ -35,10 +34,10 @@
 
         <img *ngIf="!imagenTemp" [src]="currenUser.img | imagen" alt="" class="w150">
         <img *ngIf="imagenTemp" [src]="imagenTemp" alt="" class="w150">
-        <br><br>
+        <br><br><br>
         <input type="file" (change)="seleccionImagen($event)" >
 
-        <br><br>
+        <br><br><br>
         <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
           <i class="fa fa-save"></i>
           Actualizar foto</button>

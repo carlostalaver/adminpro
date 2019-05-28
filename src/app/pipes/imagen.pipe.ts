@@ -13,6 +13,7 @@ export class ImagenPipe implements PipeTransform {
     if (!imagen) {
       return URL + '/usuario/noimage';
     }
+
     // verificar si se un imagen de google
     if( imagen.indexOf('https') >= 0) {
       return imagen;

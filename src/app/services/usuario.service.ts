@@ -88,13 +88,16 @@ export class UsuarioService  {
   }
 
   actualizarUsuario(usuarioActualizado: Usuario): Observable<any> {
-    const URL = `${URL_SERVICES}/usuario/${this.usuario._id}?token=${this.token}`;
+    const URL = `${URL_SERVICES}/usuario/${usuarioActualizado._id}?token=${this.token}`;
 
     return this.http.put(URL, usuarioActualizado)
       .pipe(
         map((res: any) => {
-          const userDB = res.usuario;
-          this.guardarStorage(userDB._id, userDB.token, userDB);
+
+          if(usuarioActualizado._id === this.usuario._id){
+            const userDB = res.usuario;
+            this.guardarStorage(userDB._id, userDB.token, userDB);
+          }
           return res;
         })
       );
@@ -111,5 +114,25 @@ export class UsuarioService  {
           console.log(err);
         });
   }
+
+  cargarUsuarios( inicio: number = 0) {
+    const URL = `${URL_SERVICES}/usuario?inicio=${inicio}`;
+
+    return this.http.get(URL);
+  }
+
+  buscarUsuario(valor: string) {
+    const URL = `${URL_SERVICES}/busqueda/todo/${valor}`;
+
+    return  this.http.get(URL);
+  }
+
+  eliminarUsuario(id: string) {
+    const URL = `${URL_SERVICES}/usuario/${id}?token=${this.token}`;
+
+    return this.http.delete(URL);
+  }
+
+
 
 }

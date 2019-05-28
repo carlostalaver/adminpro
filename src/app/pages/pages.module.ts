@@ -17,6 +17,7 @@ import { ObservablesComponent } from './observables/observables.component';
 import { LoginGuard } from '../services/guards/login.guard';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ProfileComponent } from './profile.component';
     PromesasComponent,
     ObservablesComponent,
     ProfileComponent,
+    UsuariosComponent,
   ],
   exports: [
     CommonModule,
