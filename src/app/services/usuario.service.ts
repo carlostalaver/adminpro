@@ -122,7 +122,7 @@ export class UsuarioService  {
   }
 
   buscarUsuario(valor: string) {
-    const URL = `${URL_SERVICES}/busqueda/todo/${valor}`;
+    const URL = `${URL_SERVICES}/busqueda/coleccion/usuarios/${valor}`;
 
     return  this.http.get(URL);
   }

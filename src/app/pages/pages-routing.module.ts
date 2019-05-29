@@ -10,6 +10,9 @@ import { ObservablesComponent } from './observables/observables.component';
 import { LoginGuard } from '../services/guards/login.guard';
 import { ProfileComponent } from './profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 const ROUTES_PAGES: Routes = [  {
   path: '',
@@ -25,6 +28,9 @@ const ROUTES_PAGES: Routes = [  {
 
     // Mantenimiento
     { path: 'usuarios', component: UsuariosComponent , data: {titulo: 'Mantenimiento de usuario'}},
+    { path: 'hospitales', component: HospitalesComponent , data: {titulo: 'Mantenimiento de hospitales'}},
+    { path: 'medicos', component: MedicosComponent , data: {titulo: 'Mantenimiento medicos'}},
+    { path: 'medico/:id', component: MedicoComponent , data: {titulo: 'Actualizar Médico'}},
     { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
   ]
 }];
