@@ -1,0 +1,24 @@
+<div class="fondo-negro animated fadeIn" [ngClass]="{oculto: modalUploadService.oculto}">
+  <div class="modal" style="display: block" tabindex="-1" role="dialog"><!--  style="display: block" se le coloca xq por defecto los modales no se muestran al cargar -->
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" (click)="cerrarModal()" class="close"  aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center" >
+            <img *ngIf="!imagenTemp" [src]="'xxx' | imagen" alt="" class="w150">
+            <img *ngIf="imagenTemp" [src]="imagenTemp" alt="" class="w150">
+            <br><br><br>
+            <input type="file" (change)="seleccionImagen($event)" >
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="subirImagen()" [disabled]="!imagenTemp" class="btn btn-primary">Subir Imagen</button>
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()" >Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

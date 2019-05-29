@@ -18,6 +18,7 @@ import { LoginGuard } from '../services/guards/login.guard';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     ObservablesComponent,
     ProfileComponent,
     UsuariosComponent,
+    ModalUploadComponent,
   ],
   exports: [
     CommonModule,

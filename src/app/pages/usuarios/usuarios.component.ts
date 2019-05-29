@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.models';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -15,10 +16,17 @@ export class UsuariosComponent implements OnInit {
   totalRegistro: number = 0;
   cargando: boolean = true;
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService,
+              private modalUploadService: ModalUploadService) { }
 
   ngOnInit() {
     this.cargarRegistro();
+    this.modalUploadService.notificacion.subscribe((res => {
+      this.cargarRegistro();
+    }), (err) => {
+      console.log('Ocurrió un error al refrescar la lista de usuarios...', err);
+
+    });
   }
 
   cargarRegistro() {
@@ -105,5 +113,10 @@ export class UsuariosComponent implements OnInit {
         console.log(' res del server ', res);
 
       });
+  }
+
+
+  mostartModal(id: string) {
+    this.modalUploadService.mostrarModal('usuarios', id);
   }
 }
