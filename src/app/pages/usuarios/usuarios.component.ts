@@ -73,7 +73,6 @@ export class UsuariosComponent implements OnInit {
   }
 
   borrarUsuario(usuario: Usuario) {
-    console.log('borrando usuario ', usuario);
     if (usuario._id === this.usuarioService.usuario._id) {
       Swal.fire('Error', 'No se puede borrar usuario', 'error');
       return;

@@ -6,4 +6,8 @@ export class Hospital {
     public _id?: string
   ) { }
 
+  setImg(value: string) {
+    this.img = value;
+  }
+
 }
