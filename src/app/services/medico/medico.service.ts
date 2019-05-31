@@ -37,14 +37,9 @@ export class MedicoService {
   }
 
   guardarMedico(medico: Medico): Observable<any> {
-
-
-
-
     if (medico._id) {
       const URL = `${URL_SERVICES}/medico/${medico._id}?token=${this.usuarioService.token}`;
       return this.http.put(URL, medico);
-
     } else {
       const URL = `${URL_SERVICES}/medico?token=${this.usuarioService.token}`;
       return this.http.post(URL, medico);

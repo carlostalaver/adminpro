@@ -15,16 +15,28 @@ export class UsuarioService  {
 
   usuario: Usuario;
   token: string;
+  menu: any = [];
 
 
   constructor(private http: HttpClient, private subirArService: SubirArchivoService) {
-    this.token = localStorage.getItem('token');
-    this.usuario = JSON.parse( localStorage.getItem('usuario'));
+    this.cargarStorage();
   }
 
   estaLogueado() {
     return !!this.token;
   }
+
+ cargarStorage() {
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+      this.usuario = JSON.parse( localStorage.getItem('usuario'));
+      this.menu = JSON.parse( localStorage.getItem('menu'));
+    } else {
+      this.token = null;
+      this.usuario = null;
+      this.menu = [];
+    }
+ }
 
   login(usuario: Usuario, recordar: boolean = false) {
 
@@ -37,7 +49,7 @@ export class UsuarioService  {
     const URL = URL_SERVICES + '/login';
     return this.http.post(URL, usuario).pipe(
       map((res: any) => {
-        this.guardarStorage(res.usuario._id, res.token, res.usuario);
+        this.guardarStorage(res.usuario._id, res.token, res.usuario, res.menu);
         return true;
       })
     );
@@ -48,19 +60,21 @@ export class UsuarioService  {
 
     return this. http.post(URL, { token: tokenGoogle}).pipe(
       map( (res: any) => {
-        this.guardarStorage(res.usuario._id, res.token, res.usuario);
+        this.guardarStorage(res.usuario._id, res.token, res.usuario, res.menu);
         return true;
       })
     );
   }
 
-  guardarStorage(id: string, token: string, usuario: Usuario) {
+  guardarStorage(id: string, token: string, usuario: Usuario, menu: any) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.usuario = usuario;
     this.token = token;
+    this.menu = menu;
   }
 
   crearUsuario(usuario: Usuario): Observable<Usuario> {
@@ -83,6 +97,7 @@ export class UsuarioService  {
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    localStorage.removeItem('menu');
 
     window.location.href = '#login';
   }
@@ -96,7 +111,7 @@ export class UsuarioService  {
 
           if(usuarioActualizado._id === this.usuario._id){
             const userDB = res.usuario;
-            this.guardarStorage(userDB._id, userDB.token, userDB);
+            this.guardarStorage(userDB._id, userDB.token, userDB, this.menu);
           }
           return res;
         })
@@ -108,7 +123,7 @@ export class UsuarioService  {
         .then( (res: any) => {
           this.usuario.img = res.usuario.img;
           Swal.fire('Imagen actualizada', 'La imagen ha sido actualizada con exito', 'success');
-          this.guardarStorage(id, this.token, this.usuario);
+          this.guardarStorage(id, this.token, this.usuario, this.menu);
         })
         .catch(err => {
           console.log(err);
