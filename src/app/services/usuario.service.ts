@@ -148,6 +148,20 @@ export class UsuarioService  {
     return this.http.delete(URL);
   }
 
-
+renovarToken() {
+    const URL = `${URL_SERVICES}/login/renuevatoken?token=${this.token}`;
+    return this.http.get(URL)
+      .pipe(
+        map( (res: any) => {
+          this.token = res.token;
+          localStorage.setItem('token', this.token);
+          return res;
+        }),
+        catchError((err) => {
+          Swal.fire('No se puedo renovar token', 'Aviso', 'error');
+          return Observable.throw(err);
+        })
+      );
+}
 
 }
